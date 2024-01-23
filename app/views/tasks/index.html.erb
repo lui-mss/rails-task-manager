@@ -1,0 +1,19 @@
+<h1>Tasks List</h1>
+
+<ul class="list-group">
+  <% @tasks.each do |task| %>
+    <li class="list-group-item">
+      <%= link_to task.title, task_path(task) %>
+
+      <%= form_with model: task, local: true do |f| %>
+          <%= f.label :completed %>
+          <%= f.check_box :completed %>
+      <% end %>
+
+      <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-warning btn-sm' %> |
+      <%= link_to 'Delete', task_path(task), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'New Task', new_task_path, class: 'btn btn-primary' %>
