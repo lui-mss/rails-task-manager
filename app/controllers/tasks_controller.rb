@@ -26,11 +26,10 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update(task_params)
-      redirect_to task_path(@task), notice: 'Task was successfully updates.'
-    else
-      render :edit
-    end
+    @task = Task.find(params[:id])
+    @task.update(task_params)
+
+    redirect_to tasks_path(@task)
   end
 
   def destroy
